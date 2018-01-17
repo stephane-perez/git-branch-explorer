@@ -11,6 +11,8 @@ class Repository(object):
         self.path = ''
         self.localBranches = []
         self.remoteBranches = []
+        self.count_modified_files = 0
+        self.count_staged_files = 0
 
     @staticmethod
     def __fetch_from_repository__(self, repository):
@@ -30,6 +32,10 @@ class Repository(object):
         """
         branches = []
         git_repo = Repo(self.path)
+
+        self.count_modified_files = len(git_repo.index.diff(None))
+        self.count_staged_files = len(git_repo.index.diff("HEAD"))
+
         self.__fetch_from_repository__(self, git_repo)
         heads = git_repo.heads
         for branch in heads:

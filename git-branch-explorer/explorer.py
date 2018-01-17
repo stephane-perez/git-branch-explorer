@@ -53,7 +53,7 @@ def process_subdirectories():
         except (InvalidGitRepositoryError, GitCommandError) as git_err:
             logger.warn('Git error in directory %s (%s)', _dir, git_err)
         except Exception as err:
-            raise ValueError('error in processing %s (%s)', _dir, err)
+            logger.error('error in processing %s (%s)', _dir, err)
     return reps
 
 
